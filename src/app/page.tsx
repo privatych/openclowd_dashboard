@@ -32,7 +32,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#2c1a1a] p-4 md:p-12 font-mono flex flex-col gap-8">
       {/* Dynamic Header */}
       <div className="flex justify-between items-center text-white border-b-2 border-white/20 pb-4">
-        <h1 className="text-2xl font-bold tracking-[0.2em]">ACC_OFFICE_v2.0 🤙</h1>
+        <h1 className="text-2xl font-bold tracking-[0.2em]">ACC_OFFICE_v4.0 🤙</h1>
         <div className="text-xs text-right">
            <div>LOCAL SERVER: 78.153.155.86</div>
            <div>TIME: {data?.time || '--:--:--'}</div>
