@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import PixelOffice from '../components/acc/PixelOffice';
+import TaskManager from '../components/acc/TaskManager';
 import GlobalTerminal from '../components/acc/GlobalTerminal';
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
+  const [tasks, setTasks] = useState<any>([]);
   const [logs, setLogs] = useState([
     { id: 1, text: 'SYSTEM: OFFICE_LOADER initialized...', type: 'info' },
     { id: 2, text: 'SUCCESS: Rendering Pixel Workspace', type: 'info' },
@@ -17,6 +19,10 @@ export default function Home() {
         const res = await fetch('/api/status');
         const json = await res.json();
         setData(json);
+
+        // Fetch tasks (simulated from local lib)
+        const taskRes = await import('../lib/tasks.json');
+        setTasks(taskRes.tasks || []);
       } catch (e) {
         console.error('Fetch error:', e);
       }
@@ -39,9 +45,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* The REAL Pixel Office component */}
-      <div className="flex-1 shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
-        <PixelOffice agents={agents} />
+      {/* The REAL Pixel Office component & Task Manager */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-8 min-h-0">
+        <div className="flex-1 shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
+          <PixelOffice agents={agents} />
+        </div>
+        
+        <div className="lg:w-[350px] shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
+          <TaskManager tasks={tasks} />
+        </div>
       </div>
 
       {/* Terminal Footer */}
